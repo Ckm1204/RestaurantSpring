@@ -1,9 +1,8 @@
 package com.restaurant.main.infraestructure.Entities;
 import jakarta.persistence.*;
 import java.util.List;
-import java.util.Optional;
 import java.util.Date;
-import java.util.Date;
+
 
 @Entity
 public class Booking {
@@ -19,6 +18,11 @@ public class Booking {
     private String plan;
     private String status;
 
+    @OneToOne(mappedBy = "booking", fetch = FetchType.LAZY)
+    private Table table;
+
+    @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
+    private List<Restaurant> restaurants;
 
 
     public Long getId() {

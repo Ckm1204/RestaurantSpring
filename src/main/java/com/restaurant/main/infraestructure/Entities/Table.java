@@ -5,19 +5,35 @@ import jakarta.persistence.*;
 public class Table {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_table")
+    private Long idTable;
+
+    @Column(name = "capacity")
     private int capacity;
+
+    @Column(name = "number")
     private int number;
+
+    @Column(name = "available")
     private boolean available;
+
+    @Column(name = "restaurant_id")
     private Long restaurantId;
 
+    @OneToOne(mappedBy = "table", fetch = FetchType.LAZY)
+    private Booking booking;
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 
-    public Long getId() {
-        return id;
+
+
+    public Long getIdTable() {
+        return idTable;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdTable(Long id) {
+        this.idTable = id;
     }
 
     public int getCapacity() {

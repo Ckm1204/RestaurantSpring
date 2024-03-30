@@ -1,23 +1,44 @@
 package com.restaurant.main.infraestructure.Entities;
 
 import jakarta.persistence.*;
+
+import java.util.List;
+
 @Entity
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_restaurant")
+    private Long idRestaurant;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "adrees")
     private String address;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "schedule")
     private String schedule;
+
+    @Column(name = "plan")
     private String plan;
 
-    public Long getId() {
-        return id;
+
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    private List<Table> tables;
+
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    private List<Booking> bookings;
+
+    public Long getIdRestaurant() {
+        return idRestaurant;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRestaurant(Long id) {
+        this.idRestaurant = id;
     }
 
     public String getName() {
